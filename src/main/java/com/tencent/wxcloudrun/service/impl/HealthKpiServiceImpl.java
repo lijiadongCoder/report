@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.service.impl;
 
+import com.tencent.wxcloudrun.dao.CountersMapper;
 import com.tencent.wxcloudrun.dao.HealthKpiMapper;
 import com.tencent.wxcloudrun.model.HealthKpiDto;
 import com.tencent.wxcloudrun.service.HealthKpiService;
@@ -11,9 +12,10 @@ import java.util.List;
 @Service
 public class HealthKpiServiceImpl implements HealthKpiService {
 
-  @Autowired
-  private HealthKpiMapper healthKpiMapper;
-
+  final HealthKpiMapper healthKpiMapper;
+  public HealthKpiServiceImpl(@Autowired HealthKpiMapper healthKpiMapper) {
+    this.healthKpiMapper = healthKpiMapper;
+  }
 
   @Override
   public List<HealthKpiDto> getAll() {
