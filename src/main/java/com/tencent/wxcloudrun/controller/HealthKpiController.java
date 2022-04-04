@@ -31,7 +31,7 @@ public class HealthKpiController {
      * @return API response json
      */
     @PostMapping(value = "/healthKpi/getAll")
-    ApiResponse getAll(@RequestBody HealthKpiDto healthKpiDto) {
+    ApiResponse getAll() {
 
         List<HealthKpiDto> list = healthKpiService.getAll();
         logger.info(list.toString());
