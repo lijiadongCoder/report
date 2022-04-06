@@ -41,6 +41,6 @@ public class HealthKpiController {
         logger.error("into");
         List<HealthKpiDto> list = healthKpiService.getAll();
         logger.info(list.toString());
-        return ApiResponse.ok(list.toString());
+        return ApiResponse.ok(list);
     }
 }
