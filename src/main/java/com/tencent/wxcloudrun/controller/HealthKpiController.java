@@ -42,6 +42,6 @@ public class HealthKpiController {
         logger.error("into");
         List<HealthKpiDto> list = healthKpiService.getAll();
         logger.info(list.toString());
-        return ApiResponse.ok(JSONArray.parseArray(JSON.toJSONString(list)));
+        return ApiResponse.ok(JSON.toJSONString(list));
     }
 }
