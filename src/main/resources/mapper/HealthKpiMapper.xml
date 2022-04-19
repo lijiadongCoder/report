@@ -18,6 +18,7 @@
           SCORE score,
           IFNULL((select count(1) from (select DISTINCT month_age from v_user_kpi_d) a),0) pageCount
         FROM v_user_kpi_d
+        where month_age=#{monthAge}
         order by monthAge
     </select>
 
