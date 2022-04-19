@@ -24,6 +24,7 @@ public class HealthKpiDto implements Serializable {
     private Integer monthAge;
     private Integer seqNum;
     private String kpiType;
+    private String kpiDesc;
     private String kpiCode;
     private BigDecimal score;
     private Integer pageCount;
