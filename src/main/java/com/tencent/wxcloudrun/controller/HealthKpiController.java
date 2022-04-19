@@ -59,7 +59,7 @@ public class HealthKpiController {
      * 查看统计结果
      * @return API response json
      */
-    @PostMapping(value = "/healthKpi/save")
+    @PostMapping(value = "/healthKpi/getResult")
     ApiResponse getResult() {
 
        UserKpiDto userKpiDto = healthKpiService.getResult();
