@@ -39,12 +39,12 @@ public class HealthKpiServiceImpl implements HealthKpiService {
   }
 
   @Override
-  public UserKpiDto getResult() {
+  public List<UserKpiDto> getResult() {
       String userId = "20220310001";
       //调用存储过程
     healthKpiMapper.execute(userId);
     //查看结果
-    UserKpiDto userKpiDto = healthKpiMapper.getResult(userId);
+    List<UserKpiDto> userKpiDto = healthKpiMapper.getResult(userId);
     return  userKpiDto;
   }
 

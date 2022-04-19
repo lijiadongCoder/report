@@ -17,5 +17,5 @@ public interface HealthKpiMapper {
 
   void execute(String userId);
 
-  UserKpiDto getResult(String userId);
+  List<UserKpiDto> getResult(String userId);
 }

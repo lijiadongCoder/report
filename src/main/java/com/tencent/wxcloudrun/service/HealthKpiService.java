@@ -11,5 +11,5 @@ public interface HealthKpiService {
 
   void save(List<UserKpiDto> userKpiDtoList);
 
-  UserKpiDto getResult();
+  List<UserKpiDto> getResult();
 }
