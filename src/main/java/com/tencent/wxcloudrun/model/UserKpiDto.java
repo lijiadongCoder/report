@@ -19,7 +19,7 @@ public class UserKpiDto implements Serializable {
     private String userName;
     private String telephoneNumber;
     private Date birthday;
-    private Integer monthAge;
+    private String monthAge;
     private Integer seqNum;
     private String kpiType;
     private String kpiCode;
