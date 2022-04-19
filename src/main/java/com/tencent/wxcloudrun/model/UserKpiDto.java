@@ -13,19 +13,20 @@ import java.util.Date;
  * @create: 2022/04/04
  */
 @Data
-public class HealthKpiDto implements Serializable {
+public class UserKpiDto implements Serializable {
 
     private String userId;
     private String userName;
     private String telephoneNumber;
     private Date birthday;
-    private Date currentDate;
-    private Integer childMonths;
     private Integer monthAge;
     private Integer seqNum;
     private String kpiType;
     private String kpiCode;
+    private String kpiDesc;
+    private String kpiFlag;
     private BigDecimal score;
-    private Integer pageCount;
+    private Date createdDate;
+    private Date updateDate;
 
 }

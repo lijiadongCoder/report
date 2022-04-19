@@ -2,19 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tencent.wxcloudrun.dao.HealthKpiMapper">
 
-    <resultMap id="healthKpiMapper" type="com.tencent.wxcloudrun.model.HealthKpiDto">
-        <id property="monthAge" column="MONTH_AGE"/>
-        <result property="monthAgeDesc" column="MONTH_AGE_DESC"/>
-        <result property="kpiType" column="KPI_TYPE" />
-        <result property="kpiCode" column="KPI_CODE" />
-        <result property="kpiDesc" column="KPI_DESC" />
-        <result property="score" column="SCORE" />
-        <result property="createdTime" column="CREATED_DATE"  />
-    </resultMap>
+    <select id="getAll" resultType="com.tencent.wxcloudrun.model.HealthKpiDto" >
+        SELECT
+          USER_ID userId,
+          USER_NAME userName,
+          TELEPHONE_NUMBE telephone,
+          BIRTHDAY birthday,
+          CURRENT_DATE currentDate,
+          CHILD_MONTHS childMonths,
+          MONTH_AGE monthAge,
+          SEQ_NUM seqNum,
+          KPI_TYPE kpiType,
+          KPI_CODE kpiCode,
+          KPI_DESC kpiDesc,
+          SCORE score,
+          IFNULL((select count(1) from (select DISTINCT month_age from v_user_kpi_d) a),0) pageCount
+        FROM v_user_kpi_d
+        order by monthAge
+    </select>
 
-    <select id="getAll" resultMap="healthKpiMapper" >
-        SELECT *
-        FROM dw_child_health_kpi_d
+    <insert id="save" parameterType="com.tencent.wxcloudrun.model.UserKpiDto" >
+        insert into DW_USER_KPI_F (USER_ID,USER_NAME,TELEPHONE_NUMBE,BIRTHDAY,MONTH_AGE
+        ,SEQ_NUM,KPI_TYPE,KPI_CODE,KPI_DESC,KPI_FLAG,SCORE,CREATED_DATE,UPDATE_DATE) values (
+        #{userId},#{userName},#{telephoneNumbe},#{birthday},#{monthAge},
+        #{seqNum},#{kpiType},#{kpiCode},#{kpiDesc},#{kpiFlag},#{score},#{createdDate},#{updateDate})
+    </insert>
+
+    <select id="execute" statementType="CALLABLE">
+        {
+            call SP_DW_USER_KPI_F(#{userId})
+        }
+    </select>
+
+    <select id="getResult" parameterType="java.lang.Integer" resultType="com.tencent.wxcloudrun.model.UserKpiDto" >
+        SELECT
+        T.MONTH_AGE monthAge,
+        T.KPI_TYPE kpiType,
+        T.KPI_DESC kpiDesc,
+        T.KPI_FLAG *T.SCORE AS score
+        FROM
+        child_health.DW_USER_KPI_F T
+        WHERE T.USER_ID = #{userId}
+        Order by
+        T.MONTH_AGE,
+        T.SEQ_NUM
     </select>
 
 </mapper>

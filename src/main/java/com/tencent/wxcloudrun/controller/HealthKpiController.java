@@ -1,17 +1,14 @@
 package com.tencent.wxcloudrun.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.model.HealthKpiDto;
-import com.tencent.wxcloudrun.service.CounterService;
+import com.tencent.wxcloudrun.model.UserKpiDto;
 import com.tencent.wxcloudrun.service.HealthKpiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,14 +31,42 @@ public class HealthKpiController {
 
 
     /**
-     * 查询全部数据
+     * 分页查询数据
      * @return API response json
      */
-    @PostMapping(value = "/healthKpi/getAll")
-    ApiResponse getAll() {
-        logger.error("into");
-        List<HealthKpiDto> list = healthKpiService.getAll();
+    @GetMapping(value = "/healthKpi/getAll")
+    ApiResponse getAll(@RequestParam("age") Integer age) {
+        //写死用户先
+        String userId = "20220310001";
+
+        List<HealthKpiDto> list = healthKpiService.getAll(userId, age);
         logger.info(list.toString());
         return ApiResponse.ok(JSON.toJSONString(list));
     }
+
+    /**
+     * 提交答题
+     * @return API response json
+     */
+    @PostMapping(value = "/healthKpi/save")
+    ApiResponse save(@RequestBody List<UserKpiDto> userKpiDtoList) {
+
+        healthKpiService.save(userKpiDtoList);
+        return ApiResponse.ok(JSON.toJSONString(0));
+    }
+
+    /**
+     * 查看统计结果
+     * @return API response json
+     */
+    @PostMapping(value = "/healthKpi/save")
+    ApiResponse getResult() {
+
+       UserKpiDto userKpiDto = healthKpiService.getResult();
+        return ApiResponse.ok(JSON.toJSONString(userKpiDto));
+    }
+
+
+
+
 }
