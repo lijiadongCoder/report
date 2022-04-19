@@ -25,7 +25,7 @@
     <insert id="save" parameterType="com.tencent.wxcloudrun.model.UserKpiDto" >
         insert into DW_USER_KPI_F (USER_ID,USER_NAME,TELEPHONE_NUMBE,BIRTHDAY,MONTH_AGE
         ,SEQ_NUM,KPI_TYPE,KPI_CODE,KPI_DESC,KPI_FLAG,SCORE,CREATED_DATE,UPDATE_DATE) values (
-        #{userId},#{userName},#{telephoneNumbe},#{birthday},#{monthAge},
+        #{userId},#{userName},#{telephoneNumber},#{birthday},#{monthAge},
         #{seqNum},#{kpiType},#{kpiCode},#{kpiDesc},#{kpiFlag},#{score},#{createdDate},#{updateDate})
     </insert>
 
