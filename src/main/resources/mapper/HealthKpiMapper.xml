@@ -35,7 +35,7 @@
         }
     </select>
 
-    <select id="getResult" parameterType="java.lang.Integer" resultType="com.tencent.wxcloudrun.model.UserKpiDto" >
+    <select id="getResult" parameterType="java.lang.String" resultType="com.tencent.wxcloudrun.model.UserKpiDto" >
         SELECT
         T.MONTH_AGE monthAge,
         T.KPI_TYPE kpiType,
