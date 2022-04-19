@@ -62,7 +62,7 @@ public class HealthKpiController {
     @PostMapping(value = "/healthKpi/getResult")
     ApiResponse getResult() {
 
-       UserKpiDto userKpiDto = healthKpiService.getResult();
+        List<UserKpiDto> userKpiDto = healthKpiService.getResult();
         return ApiResponse.ok(JSON.toJSONString(userKpiDto));
     }
 
